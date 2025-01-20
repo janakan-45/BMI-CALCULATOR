@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/home.css" type="text/css">
+    
+</head>
+<body>
+    <h1 id="h">BMI CALCULATION</h1>
+    <div id="nav">
+        <a href="mainHome.html">Home</a>
+        <a href="about.html">BMI</a>
+        <a href="contactus.html">ContactUs</a>
+    </div>
+    <div id="inst">
+        <p>Please enter your weight (kg) and height (cm) in the fields below.</p>
+        <ul>
+            <li>Example: weight=60</li>
+            <li>Example: height=170</li>
+        </ul>
+    </div>
+    <div id="div1">
+        <div id="div2">
+            <form method="post">
+                <table border="0px">
+                    <tr>
+                        <th colspan="2">
+                            <h1 id="h12">Body Mass Index</h1>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="weight"><h2>Weight</h2></label>
+                        </td>
+                        <td>
+                            <input type="text" id="weight" name="weight" placeholder="weight" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="height"><h2>Height</h2></label>
+                        </td>
+                        <td>
+                            <input type="text" id="height" name="height" placeholder="height" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="submit" id="submit" name="submit" value="Calculate">
+                        </td>
+                        <td>
+                            <input type="reset" id="Submit" name="submit" value="Reset">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    <div id="gif">
+        <marquee direction="right" scrollamount="7" scrolldelay="50">
+          <img src="https://media.baamboozle.com/uploads/images/197003/1607552514_101332">
+        </marquee>
+  
+      </div>
+    <footer class="footer">
+        <div class="footer-container">
+            <p>&copy; 2025 BMI CALCULATION. All Rights Reserved.</p>
+            <ul class="footer-links">
+                <li><a href="privacy.html">Privacy Policy</a></li>
+                <li><a href="terms.html">Terms of Service</a></li>
+                <li><a href="contactus.html">Contact Us</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div id="bmiModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="bmiResult"></p>
+            <p>If you need more information about your BMI count, please <a href="about.html" >click here</a>.</p>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector("form").addEventListener("submit", function(event) {
+            // Prevent form submission
+            event.preventDefault();
+
+            var weight = document.getElementById("weight").value;
+            var height = document.getElementById("height").value;
+
+            if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0) {
+                alert("Please enter valid numeric values for weight and height!");
+                return;
+            }
+
+            weight = parseFloat(weight);
+            height = parseFloat(height) / 100; // Convert height to meters
+            var bmi = weight / Math.pow(height, 2);
+         if(bmi<18.5)
+         {
+            document.getElementById("bmiResult").innerText = "Your BMI is: " + bmi.toFixed(2)+", and you are Under Weight.";
+         }
+         else if(bmi>=18.5 && bmi<=24.9)
+         {
+            document.getElementById("bmiResult").innerText = "Your BMI is: " + bmi.toFixed(2)+", and you are Normal Weight.";
+         }
+         else if(bmi>=25 && bmi<=29.9)
+         {
+            document.getElementById("bmiResult").innerText = "Your BMI is: " + bmi.toFixed(2)+", and you are Over Weight.";
+         }
+         else if(bmi>=30 && bmi<=34.9)
+         {
+            document.getElementById("bmiResult").innerText = "Your BMI is: " + bmi.toFixed(2)+", and you are  Obesity Class I.";
+         }
+         else if(bmi>=35 && bmi<=39.9)
+         {
+            document.getElementById("bmiResult").innerText = "Your BMI is: " + bmi.toFixed(2)+", and you are  Obesity Class II.";
+         }
+         else if(bmi>=40 )
+         {
+            document.getElementById("bmiResult").innerText = "Your BMI is: " + bmi.toFixed(2)+", and you are  Obesity Class III.";
+         }
+
+            // Display BMI in modal
+            
+
+            var modal = document.getElementById("bmiModal");
+            modal.style.display = "block";
+
+            // Close modal when "x" is clicked
+            document.querySelector(".close").onclick = function() {
+                modal.style.display = "none";
+            };
+
+            // Close modal when clicking outside the modal content
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            };
+        });
+    </script>
+</body>
+</html>
